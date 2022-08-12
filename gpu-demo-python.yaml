@@ -26,6 +26,18 @@ spec:
   - name: pvc-volume
     persistentVolumeClaim:
        claimName: $user-pvc # 변경
+  - name: project
+    hostPath:
+      path: /project
+      type: DirectoryOrCreate
+  - name: data
+    hostPath:
+      path: /data
+      type: DirectoryOrCreate
+  - name: guest
+    hostPath:
+      path: /guest
+      type: DirectoryOrCreate
 
 
   containers:
@@ -36,11 +48,18 @@ spec:
       name: shmdir
     - mountPath: /home/$user ##변경
       name: pvc-volume
+    - mountPath: /home/project
+      name: project
+    - mountPath: /home/data
+      name: data
+    - mountPath: /home/guest
+      name: guest
     command:
       - "/bin/sh"
       - "-c"
     args:
-      - cd /home/$user && $command
+            #- cd /home/mhkwon/ && python ./hello-tf1.py > hello-tf1.txt 2>&1 && tail -f /dev/null
+      - $command
     securityContext:
       allowPrivilegeEscalation: false
 
