@@ -1,0 +1,51 @@
+#!/bin/bash
+user=$1
+uid=$2
+name=$3
+command=$4
+gpus=$5
+image=$6
+
+echo -e "
+apiVersion: v1
+kind: Pod
+metadata:
+  name: $name
+spec:
+  securityContext:
+    runAsUser: $uid  # UID 변경
+    runAsGroup: $uid # GID 변경
+    fsGroup: $uid    # groups 변경
+
+  restartPolicy: OnFailure
+
+  volumes:
+  - name: shmdir
+    emptyDir:
+      medium: Memory
+  - name: pvc-volume
+    persistentVolumeClaim:
+       claimName: $user-pvc # 변경
+
+
+  containers:
+  - name: gpu-container
+    image: $image # 변경
+    volumeMounts:
+    - mountPath: /dev/shm
+      name: shmdir
+    - mountPath: /home/$user ##변경
+      name: pvc-volume
+    command:
+      - "/bin/sh"
+      - "-c"
+    args:
+      - cd /home/$user && $command
+    securityContext:
+      allowPrivilegeEscalation: false
+
+    resources:
+      requests:
+        nvidia.com/gpu: $gpus
+      limits:
+        nvidia.com/gpu: $gpus " | kubectl create -n $user  -f -

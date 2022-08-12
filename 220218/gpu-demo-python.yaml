@@ -1,0 +1,70 @@
+#!/bin/bash
+user=$1
+uid=$2
+name=$3
+command=$4
+gpus=$5
+image=$6
+
+echo -e "
+apiVersion: v1
+kind: Pod
+metadata:
+  name: $name
+spec:
+  securityContext:
+    runAsUser: $uid  # UID 변경
+    runAsGroup: $uid # GID 변경
+    fsGroup: $uid    # groups 변경
+
+  restartPolicy: OnFailure
+
+  volumes:
+  - name: shmdir
+    emptyDir:
+      medium: Memory
+  - name: pvc-volume
+    persistentVolumeClaim:
+       claimName: $user-pvc # 변경
+  - name: project
+    hostPath:
+      path: /project
+      type: DirectoryOrCreate
+  - name: data
+    hostPath:
+      path: /data
+      type: DirectoryOrCreate
+  - name: guest
+    hostPath:
+      path: /guest
+      type: DirectoryOrCreate
+
+
+  containers:
+  - name: gpu-container
+    image: $image # 변경
+    volumeMounts:
+    - mountPath: /dev/shm
+      name: shmdir
+    - mountPath: /home/$user ##변경
+      name: pvc-volume
+    - mountPath: /home/project
+      name: project
+    - mountPath: /home/data
+      name: data
+    - mountPath: /home/guest
+      name: guest
+    command:
+      - "/bin/sh"
+      - "-c"
+    args:
+            #- cd /home/mhkwon/ && python ./hello-tf1.py > hello-tf1.txt 2>&1 && tail -f /dev/null
+      - $command
+    securityContext:
+      allowPrivilegeEscalation: false
+
+    resources:
+      requests:
+        nvidia.com/gpu: $gpus
+      limits:
+        nvidia.com/gpu: $gpus " | kubectl create -n $user  -f -
