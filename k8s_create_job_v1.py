@@ -154,22 +154,22 @@ if args.__dict__['job_name']:
     if args.__dict__['gpu_count']:
         if args.__dict__['image_name']:
             os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-            #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+            print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
         else:
             os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-            #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+            print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
     else:
         os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-        #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+        print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + args.job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
 else:
     if args.__dict__['gpu_count']:
         if args.__dict__['image_name']:
             os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-            #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+            print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
         else:
             os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-            #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+            print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
     else:
         os.system("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
-        #print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
+        print("bash ./gpu-demo-python.yaml " + user + " " + uid + " " + job_name + " '" + args.command + "' " + args.gpu_count + " " + args.image_name)
 
