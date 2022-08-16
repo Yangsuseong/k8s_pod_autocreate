@@ -21,19 +21,19 @@ optional arguments:
 ```
 
 ::Options::
-	* -c , --command
-		* 필수 옵션
-		* Pod 생성 시 실행할 Command 입력
-	* -n , --name
-		* 생성할 Pod 이름 설정
-		* Default : <USER NAME>-autocreate-<IDX> 로 겹치지 않게 자동 생성
-	* -g , --gpus
-		* 사용할 GPU 개수 설정
-		* CPU 만 사용 시 0 으로 설정
-		* Default : 0
-	* -i , --image
-		* Pod  생성 시 사용할 이미지 입력
-		* Default: nvidia/cuda:11.4.1-base-ubuntu20.04
+* -c , --command
+	* 필수 옵션
+	* Pod 생성 시 실행할 Command 입력
+* -n , --name
+	* 생성할 Pod 이름 설정
+	* Default : <USER NAME>-autocreate-<IDX> 로 겹치지 않게 자동 생성
+* -g , --gpus
+	* 사용할 GPU 개수 설정
+	* CPU 만 사용 시 0 으로 설정
+	* Default : 0
+* -i , --image
+	* Pod  생성 시 사용할 이미지 입력
+	* Default: nvidia/cuda:11.4.1-base-ubuntu20.04
 
 
 ## 코드 실행 예시
